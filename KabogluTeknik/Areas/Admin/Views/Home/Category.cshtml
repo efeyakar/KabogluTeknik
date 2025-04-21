@@ -1,0 +1,157 @@
+﻿@model KabogluTeknik.Entities.Category
+
+@{
+    ViewData["Title"] = "Kategori Ayarları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+<!-- Özel CSS -->
+<style>
+    .image-upload-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .upload-box {
+        width: 200px;
+        height: 200px;
+        border: 2px dashed #007bff;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        background-color: #f8f9fa;
+        text-align: center;
+    }
+
+        .upload-box:hover {
+            background-color: #e9ecef;
+        }
+
+    .upload-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .upload-text {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #007bff;
+    }
+
+    #imagePreview {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 5px;
+    }
+</style>
+
+<div id="sectionContent">
+    <!-- Kategori Ekleme/Düzenleme Formu -->
+    <form method="post" id="categoryForm" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!-- Id ve Mevcut Resim URL'sini saklamak için gizli alanlar -->
+        <input type="hidden" asp-for="Id" id="Id" />
+        <input type="hidden" asp-for="ImageUrl" id="ImageUrl" />
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Başlık</label>
+            <input asp-for="Title" class="form-control" placeholder="Kategori Başlığını Girin" id="Title" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" placeholder="Kategori Açıklamasını Girin" id="Description" required></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <!-- Resim Yükleme Alanı (2 sütunlu yapı) -->
+        <div class="row">
+            <!-- Sol Sütun: Yeni Resim Yükleme (önizleme) -->
+            <div class="col-md-12 mb-3 text-center">
+                <label for="imageUpload" class="form-label">Resim Yükle</label>
+                <div class="image-upload-container">
+                    <label for="imageUpload" class="upload-box">
+                        <input type="file" asp-for="ImageFile" id="imageUpload" class="form-control d-none" accept="image/*" onchange="previewImage(event)" />
+                        <div class="upload-content">
+                            <img id="imagePreview" src="https://via.placeholder.com/150" class="img-thumbnail" />
+                            <span class="upload-text">Resim Seç</span>
+                        </div>
+                    </label>
+                </div>
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            @* <!-- Sağ Sütun: Mevcut Resmin Gösterimi -->
+            <div class="col-md-6 mb-3 text-center">
+                @if (!string.IsNullOrEmpty(Model?.ImageUrl))
+                {
+                    <div>
+                        <label class="form-label">Mevcut Resim</label>
+                        <div>
+                            <img src="@Model.ImageUrl" alt="Kategori Resmi" class="img-thumbnail" style="max-height: 200px;" id="currentImage" />
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p>Mevcut resim yok.</p>
+                }
+            </div> *@
+        </div>
+        <!-- /Resim Yükleme Alanı -->
+
+        <button type="submit" class="btn btn-primary mt-3 w-100">Kaydet</button>
+    </form>
+</div>
+
+
+@await Component.InvokeAsync("_CategoryListComponentPartial")
+
+
+    <script>
+        // Yeni resim seçildiğinde önizleme yapar
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById("imagePreview").src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+    // Düzenleme butonuna tıklanınca, ilgili kategori verilerini forma yükler
+    document.addEventListener('DOMContentLoaded', function () {
+        var editButtons = document.querySelectorAll('.edit-category');
+        editButtons.forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                var id = this.getAttribute('data-id');
+                var title = this.getAttribute('data-title');
+                var description = this.getAttribute('data-description');
+                var imageUrl = this.getAttribute('data-imageurl');
+
+                document.getElementById('Id').value = id;
+                document.getElementById('Title').value = title;
+                document.getElementById('Description').value = description;
+                document.getElementById('ImageUrl').value = imageUrl;
+
+                // // Güncel resmi göster
+                // var currentImage = document.getElementById('currentImage');
+                // if (currentImage) {
+                //     currentImage.src = imageUrl;
+                // }
+                // Yeni resim önizlemesini de güncelle
+                document.getElementById('imagePreview').src = imageUrl;
+
+                // Formun üst kısmına scroll yap
+                document.getElementById('categoryForm').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    });
+</script>

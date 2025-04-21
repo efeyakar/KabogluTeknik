@@ -1,0 +1,40 @@
+﻿@model KabogluTeknik.Entities.Contact
+<!-- İletişim Section -->
+<section id="iletisim" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title display-5 mb-4">İletişim</h2>
+        <div class="row">
+            <!-- İletişim Açıklama -->
+            <div class="col-md-6">
+                <p class="lead" style="font-size: 1.25rem;">
+                    @Model.Description
+                </p>
+               @*  <p class="lead" style="font-size: 1.25rem;">
+                    Çalışma Saatleri: Pazartesi - Cuma 09:00 - 18:00
+                </p> *@
+            </div>
+            <!-- İletişim Bilgileri -->
+            <div class="col-md-6">
+                <h4 style="font-size: 1.5rem; font-weight: bold;">İletişim Bilgileri</h4>
+                <p style="font-size: 1.25rem;"><i class="fa fa-phone"></i> Telefon: @Model.Phone</p>
+                <p style="font-size: 1.25rem;"><i class="fa fa-envelope"></i> Email: @Model.Email</p>
+                <p style="font-size: 1.25rem;"><i class="fa fa-map-marker-alt"></i> Adres: @Model.Address</p>
+                <!-- Sosyal Medya İkonları -->
+                <div class="social-icons mt-4">
+                    <a href="@Model.Whatsapp" target="_blank" class="me-3">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="@Model.Facebook" target="_blank" class="me-3">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="@Model.Twitter" target="_blank" class="me-3">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="@Model.Instagram" target="_blank" class="me-3">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,122 @@
+﻿@model KabogluTeknik.Entities.About
+@{
+    ViewData["Title"] = "Hakkında Ayarları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .image-upload-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .upload-box {
+        width: 200px;
+        height: 200px;
+        border: 2px dashed #007bff;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        background-color: #f8f9fa;
+        text-align: center;
+    }
+
+        .upload-box:hover {
+            background-color: #e9ecef;
+        }
+
+    .upload-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .upload-text {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #007bff;
+    }
+
+    #imagePreview {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 5px;
+    }
+
+</style>
+
+<div id="sectionContent">
+    <form method="post" id="aboutForm" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <!-- Açıklama Alanı -->
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" placeholder="Açıklamayı Girin" required></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <!-- Satır (Row) Başlangıcı -->
+        <div class="row">
+            <!-- Sol Sütun: Resim Yükleme Alanı -->
+            <div class="col-md-6 mb-3 text-center">
+                <label for="imageUpload" class="form-label">Resim Yükle</label>
+
+                <div class="image-upload-container">
+                    <label for="imageUpload" class="upload-box">
+                        <input type="file" asp-for="ImageFile" id="imageUpload"
+                               class="form-control d-none"
+                               accept="image/*"
+                               onchange="previewImage(event)"
+                               required />
+                        <div class="upload-content">
+                            <!-- Yeni yüklenecek resmin önizlemesi -->
+                            <img id="imagePreview" src="https://via.placeholder.com/150" class="img-thumbnail" />
+                            <span class="upload-text">Resim Seç</span>
+                        </div>
+                    </label>
+                </div>
+
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+            <!-- Sağ Sütun: Mevcut Resim (varsa) -->
+            <div class="col-md-6 mb-3 text-center">
+                @if (!string.IsNullOrEmpty(Model?.ImageUrl))
+                {
+                    <div>
+                        <label class="form-label">Mevcut Resim</label>
+                        <div>
+                            <img src="@Model.ImageUrl" alt="Mevcut Resim" class="img-thumbnail" style="max-height: 200px;" />
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p>Mevcut bir resim yok.</p>
+                }
+            </div>
+        </div>
+        <!-- Satır (Row) Sonu -->
+        <!-- Kaydet Butonu -->
+        <button type="submit" class="btn btn-primary w-100">Kaydet</button>
+    </form>
+</div>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const imagePreview = document.getElementById("imagePreview");
+            imagePreview.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+</script>

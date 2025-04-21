@@ -1,0 +1,27 @@
+﻿@model KabogluTeknik.Entities.Header
+@{
+    ViewData["Title"] = "Header Ayarları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div id="sectionContent">
+    <form method="post" id="headerForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!-- Id bilgisini saklamak için gizli alan -->
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Başlık</label>
+            <input asp-for="Title" class="form-control" placeholder="Başlık Girin" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" placeholder="Açıklama Girin" required></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+    </form>
+</div>

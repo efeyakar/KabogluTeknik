@@ -1,0 +1,67 @@
+﻿@model KabogluTeknik.Entities.General
+@{
+    ViewData["Title"] = "Genel Ayarlar";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div id="sectionContent">
+    <form method="post" id="generalForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!-- Id bilgisini saklamak için gizli alan -->
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="WebsiteName" class="form-label">Website Adı</label>
+            <input asp-for="WebsiteName" class="form-control" placeholder="Website Adını Girin" required />
+            <span asp-validation-for="WebsiteName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsShowHeader" class="form-label">Header'ı Göster</label>
+            <select asp-for="IsShowHeader" class="form-select" required>
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
+            </select>
+            <span asp-validation-for="IsShowHeader" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsShowAbout" class="form-label">Hakkımda'yı Göster</label>
+            <select asp-for="IsShowAbout" class="form-select" required>
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
+            </select>
+            <span asp-validation-for="IsShowAbout" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsShowCategory" class="form-label">Kategorileri Göster</label>
+            <select asp-for="IsShowCategory" class="form-select" required>
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
+            </select>
+            <span asp-validation-for="IsShowCategory" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsShowProject" class="form-label">Projeleri Göster</label>
+            <select asp-for="IsShowProject" class="form-select" required>
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
+            </select>
+            <span asp-validation-for="IsShowProject" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsShowContact" class="form-label">İletişimi Göster</label>
+            <select asp-for="IsShowContact" class="form-select" required>
+                <option value="true">Evet</option>
+                <option value="false">Hayır</option>
+            </select>
+            <span asp-validation-for="IsShowContact" class="text-danger"></span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+    </form>
+</div>

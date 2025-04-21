@@ -1,0 +1,19 @@
+﻿@model KabogluTeknik.Entities.About
+
+<section id="hakkimda" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Hakkımızda</h2>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <p>
+                    @Model.Description
+                </p>
+            </div>
+            <div class="col-md-6">
+                <img src="@Model.ImageUrl"
+                     class="img-fluid rounded"
+                     alt="Hakkımda" />
+            </div>
+        </div>
+    </div>
+</section>

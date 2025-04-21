@@ -1,0 +1,186 @@
+﻿@* @{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+@await Component.InvokeAsync("_AdminLayoutHeadComponentPartial")
+
+<body class="sidebar-mini">
+    <div class="wrapper">
+
+        <!-- Main Header -->
+        @await Component.InvokeAsync("_AdminLayoutHeaderComponentPartial")
+
+
+        <!-- Left side column. contains the logo and sidebar -->
+        @await Component.InvokeAsync("_AdminLayoutSidebarComponentPartial")
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            @await Component.InvokeAsync("_AdminLayoutMainSectionViewbagComponentPartial")
+
+            <!-- Main content -->
+            @RenderBody()
+            <!-- content -->
+        </div>
+        <!-- content-wrapper -->
+        <!-- Main Footer -->
+        <footer class="main-footer dark-bg">
+            <div class="pull-right hidden-xs"> Version 1.0</div>
+            Copyright &copy; @DateTime.Now.Year MultiShop | Tüm Hakları Saklıdır.
+        </footer>
+    </div>
+    <!-- wrapper -->
+    <!-- jQuery -->
+    <script src="~/MainDownload-OvioAdmin-html5-template/html/dist/js/jquery.min.js"></script>
+    <script src="~/MainDownload-OvioAdmin-html5-template/html/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/MainDownload-OvioAdmin-html5-template/html/dist/js/ovio.js"></script>
+</body>
+</html> *@
+
+
+
+
+@{
+    string currentUrl = Context.Request.Path;
+}
+
+
+
+
+            <!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Paneli</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+      }
+      /* Üst navbar */
+      .navbar {
+        background: #212529;
+      }
+      .navbar-brand {
+        font-weight: bold;
+      }
+      /* Sidebar */
+      .sidebar {
+        min-height: 100vh;
+        background: #343a40;
+      }
+      .sidebar a {
+        color: #fff;
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+      }
+      .sidebar a:hover,
+      .sidebar a.active {
+        background: #007bff;
+      }
+      /* İçerik alanı */
+      .content {
+        padding: 20px;
+      }
+      @@media (max-width: 768px) {
+        .sidebar {
+          min-height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Üst Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Admin Paneli</a>
+        <!-- Butonun hedefi artık sidebar menü -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#sidebarMenu"
+          aria-controls="sidebarMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sol Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse" id="sidebarMenu">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column" id="adminSidebar">
+                        <li class="nav-item">
+                            <a class="nav-link @(currentUrl == "/Admin/Home/General" ? "active" : "")" href="/Admin/Home/General">
+                                <i class="fas fa-cogs me-2"></i>Genel Ayarlar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentUrl == "/Admin/Home/Header" ? "active" : "")" href="/Admin/Home/Header">
+                                <i class="fas fa-heading me-2"></i>Başlık
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentUrl == "/Admin/Home/About" ? "active" : "")" href="/Admin/Home/About">
+                                <i class="fas fa-user me-2"></i>Hakkımda
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentUrl == "/Admin/Home/Category" ? "active" : "")" href="/Admin/Home/Category">
+                                <i class="fas fa-th-list me-2"></i>Kategoriler
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentUrl == "/Admin/Home/Product" ? "active" : "")" href="/Admin/Home/Product">
+                                <i class="fas fa-box me-2"></i>Ürünler
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentUrl == "/Admin/Home/Project" ? "active" : "")" href="/Admin/Home/Project">
+                                <i class="fas fa-project-diagram me-2"></i>Projeler
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(currentUrl == "/Admin/Home/Contact" ? "active" : "")" href="/Admin/Home/Contact">
+                                <i class="fas fa-envelope me-2"></i>İletişim
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        <!-- Ana İçerik Alanı -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 content">
+          @RenderBody()
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+  </body>
+</html>

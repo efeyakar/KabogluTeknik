@@ -1,0 +1,62 @@
+﻿@model KabogluTeknik.Entities.Contact
+@{
+    ViewData["Title"] = "İletişim Ayarları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div id="sectionContent">
+    <form method="post" id="contactForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <input asp-for="Description" class="form-control" placeholder="Açıklama Girin" required />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label">Telefon</label>
+            <input type="tel" asp-for="Phone" class="form-control" placeholder="Telefon Girin" required />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">E-Posta</label>
+            <input type="email" asp-for="Email" class="form-control" placeholder="E-Posta Girin" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label">Adres</label>
+            <textarea asp-for="Address" class="form-control" placeholder="Adres Girin" required></textarea>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Whatsapp" class="form-label">WhatsApp</label>
+            <input type="tel" asp-for="Whatsapp" class="form-control" placeholder="WhatsApp Numarası Girin" required />
+            <span asp-validation-for="Whatsapp" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Facebook" class="form-label">Facebook</label>
+            <input type="url" asp-for="Facebook" class="form-control" placeholder="Facebook URL Girin" required />
+            <span asp-validation-for="Facebook" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Twitter" class="form-label">Twitter</label>
+            <input type="url" asp-for="Twitter" class="form-control" placeholder="Twitter URL Girin" required />
+            <span asp-validation-for="Twitter" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Instagram" class="form-label">Instagram</label>
+            <input type="url" asp-for="Instagram" class="form-control" placeholder="Instagram URL Girin" required />
+            <span asp-validation-for="Instagram" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+    </form>
+</div>

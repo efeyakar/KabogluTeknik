@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+
+<!-- Header -->
+@await Component.InvokeAsync("_HeaderViewComponentPartial")
+<!-- Hakkımda Section -->
+@await Component.InvokeAsync("_AboutViewComponentPartial")
+<!-- Ürün Kategorileri Section -->
+@await Component.InvokeAsync("_CategoryViewComponentPartial")
+<!-- Projeler Section -->
+@await Component.InvokeAsync("_ProjectViewComponentPartial")
+<!-- İletişim Section -->
+@await Component.InvokeAsync("_ContactViewComponentPartial")

@@ -1,0 +1,89 @@
+﻿@model List<KabogluTeknik.Entities.Category>
+
+<section id="urunler" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">Ürün Kategorileri</h2>
+
+        <div id="urunlerCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                @* Burada, 4'erli gruplar hâlinde carousel-item oluşturuyoruz *@
+                @for (int i = 0; i < Model.Count; i += 4)
+                {
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="row g-3">
+                            @for (int j = i; j < i + 4 && j < Model.Count; j++)
+                            {
+                                var item = Model[j];
+                                <div class="col-sm-6 col-md-4 col-lg-3">
+                                    <div class="card portfolio-item h-100">
+                                        <img src="@item.ImageUrl" class="card-img-top" alt="@item.Title" />
+                                        <div class="card-body">
+                                            <h5 class="card-title">@item.Title</h5>
+                                            <p class="card-text">@item.Description</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+
+            </div>
+
+            @* Carousel kontrol butonları *@
+            <button class="carousel-control-prev" type="button" data-bs-target="#urunlerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Önceki</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#urunlerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Sonraki</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+@* <style>
+  /* Carousel içindeki öğelerin yan yana dizilmesi */
+  #urunlerCarousel .carousel-inner {
+    display: flex;
+    overflow: hidden;
+  }
+  /* Carousel-item'lerin esnek olarak yan yana dizilmesi */
+  #urunlerCarousel .carousel-item {
+    flex: 0 0 auto;
+    transition: transform 0.5s ease;
+  }
+  /* Responsive olarak gösterilecek öğe sayısını belirleyen media query'ler */
+  @@media (min-width: 1200px) {
+    /* 4 öğe görünsün */
+    #urunlerCarousel .carousel-item {
+      width: 25%;
+    }
+  }
+  @@media (min-width: 992px) and (max-width: 1199px) {
+    /* 3 öğe görünsün */
+    #urunlerCarousel .carousel-item {
+      width: 33.3333%;
+    }
+  }
+  @@media (min-width: 768px) and (max-width: 991px) {
+    /* 2 öğe görünsün */
+    #urunlerCarousel .carousel-item {
+      width: 50%;
+    }
+  }
+  @@media (max-width: 767px) {
+    /* Mobilde 1 öğe */
+    #urunlerCarousel .carousel-item {
+      width: 100%;
+    }
+  }
+  /* Kartlara aralarından boşluk eklemek için */
+  #urunlerCarousel .carousel-inner .card {
+    margin: 0 5px;
+  }
+</style>
+ *@

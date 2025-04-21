@@ -1,0 +1,73 @@
+﻿@model List<KabogluTeknik.Entities.Category>
+<!-- Kategori Listesi Tablosu -->
+<div class="mt-5">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Başlık</th>
+                <th>Açıklama</th>
+                <th>Resim</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Description</td>
+                        <td>
+                            <img src="@item.ImageUrl" alt="Kategori Resmi" style="max-width: 100px; max-height: 100px;" />
+                        </td>
+                        <td>
+                            <!-- JS ile formu dolduracak olan düzenleme butonu -->
+                            <a href="#"
+                               class="btn btn-sm btn-warning edit-category"
+                               data-id="@item.Id"
+                               data-title="@item.Title"
+                               data-description="@item.Description"
+                               data-imageurl="@item.ImageUrl">
+                                Düzenle
+                            </a>
+                            <!-- Silme işlemi için farklı aksiyon -->
+                            <a href="/Admin/Home/DeleteCategory/@item.Id" class="btn btn-sm btn-danger">
+                                Sil
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var editButtons = document.querySelectorAll('.edit-category');
+        editButtons.forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Butonun data attribute'larından verileri alıyoruz.
+                var id = this.getAttribute('data-id');
+                var title = this.getAttribute('data-title');
+                var description = this.getAttribute('data-description');
+                var imageUrl = this.getAttribute('data-imageurl');
+
+                // Form alanlarını dolduruyoruz.
+                document.getElementById('Id').value = id;
+                document.getElementById('Title').value = title;
+                document.getElementById('Description').value = description;
+                document.getElementById('ImageUrl').value = imageUrl;
+
+                // (Opsiyonel) Formun üst kısmına scroll yapabilirsiniz.
+                document.getElementById('categoryForm').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    });
+</script>

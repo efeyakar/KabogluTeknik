@@ -1,0 +1,62 @@
+﻿@model KabogluTeknik.Entities.Product
+@{
+    ViewData["Title"] = "Ürün Ayarları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div id="sectionContent">
+    <form asp-action="SaveProduct" method="post" id="productForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!-- Id bilgisini saklamak için gizli alan -->
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="CategoryId" class="form-label">Kategori</label>
+            <select asp-for="CategoryId" class="form-select" required>
+                <option value="">Kategori Seçin</option>
+                @if (ViewBag.Categories != null)
+                {
+                    foreach (var category in (IEnumerable<SelectListItem>)ViewBag.Categories)
+                    {
+                        <option value="@category.Value" selected="@(category.Selected ? "selected" : null)">@category.Text</option>
+                    }
+                }
+            </select>
+
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Ürün Adı</label>
+            <input asp-for="Name" class="form-control" placeholder="Ürün Adını Girin" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" placeholder="Ürün Açıklamasını Girin" required></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageUrl" class="form-label">Resim URL</label>
+            <input asp-for="ImageUrl" class="form-control" placeholder="Ürün Resim URL'sini Girin" required />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TrendyolUrl" class="form-label">Trendyol URL</label>
+            <input asp-for="TrendyolUrl" class="form-control" placeholder="Trendyol Linkini Girin" required />
+            <span asp-validation-for="TrendyolUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="HepsiburadaUrl" class="form-label">Hepsiburada URL</label>
+            <input asp-for="HepsiburadaUrl" class="form-control" placeholder="Hepsiburada Linkini Girin" required />
+            <span asp-validation-for="HepsiburadaUrl" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+    </form>
+</div>

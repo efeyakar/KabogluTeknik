@@ -1,0 +1,33 @@
+﻿@model KabogluTeknik.Entities.Project
+@{
+    ViewData["Title"] = "Proje Ayarları";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div id="sectionContent">
+    <form asp-action="SaveProject" method="post" id="projectForm">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!-- Id bilgisini saklamak için gizli alan -->
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Başlık</label>
+            <input asp-for="Title" class="form-control" placeholder="Proje Başlığını Girin" required />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" placeholder="Proje Açıklamasını Girin" required></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ImageUrl" class="form-label">Resim URL</label>
+            <input asp-for="ImageUrl" class="form-control" placeholder="Proje Resim URL'sini Girin" required />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+    </form>
+</div>
